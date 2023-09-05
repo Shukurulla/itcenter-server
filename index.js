@@ -26,9 +26,7 @@ app.post("/add-user", (req, res) => {
 });
 app.post("/create-course", (req, res) => {
   Course.create(req.body);
-  console.log("====================================");
   console.log(req.body);
-  console.log("====================================");
 });
 
 app.get("/courses", async (req, res) => {

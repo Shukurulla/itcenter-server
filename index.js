@@ -30,7 +30,6 @@ app.get("/users", async (req, res) => {
 });
 app.post("/create-course", (req, res) => {
   Course.create(req.body);
-  console.log(req.body);
 });
 
 app.get("/courses", async (req, res) => {
@@ -40,7 +39,6 @@ app.get("/courses", async (req, res) => {
 
 app.post("/delete-course/:id", async (req, res) => {
   const id = req.body.id;
-  console.log(req.body.id);
   await Course.findByIdAndRemove(id);
   const courses = await Course.find();
   res.json(courses);
@@ -51,6 +49,12 @@ app.post("/edit-course/:id", async (req, res) => {
   const product = await Course.findByIdAndUpdate(id, req.body);
 });
 
-app.listen(3001, () => {
+app.post("/update-user/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await Course.findByIdAndUpdate(id, req.body);
+  res.json(user)
+});
+
+app.listen(1111, () => {
   console.log("server has ben started");
 });

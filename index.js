@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
-const User = require("./models/User");
-const Course = require("./models/Courses");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
+const UserRoutes = require("./routers/user");
+const MentorRoutes = require("./routers/mentor");
+const CourseRoutes = require("./routers/course");
 // enable cors
 app.use(
   cors({
@@ -20,41 +20,10 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(UserRoutes);
+app.use(MentorRoutes);
+app.use(CourseRoutes);
 
-app.post("/add-user", (req, res) => {
-  User.create(req.body);
-});
-app.get("/users", async (req, res) => {
-  const users = await User.find();
-  res.json(users);
-});
-app.post("/create-course", (req, res) => {
-  Course.create(req.body);
-});
-
-app.get("/courses", async (req, res) => {
-  const courses = await Course.find();
-  res.json(courses);
-});
-
-app.post("/delete-course/:id", async (req, res) => {
-  const id = req.body.id;
-  await Course.findByIdAndRemove(id);
-  const courses = await Course.find();
-  res.json(courses);
-});
-
-app.post("/edit-course/:id", async (req, res) => {
-  const id = req.params.id;
-  const product = await Course.findByIdAndUpdate(id, req.body);
-});
-
-app.post("/update-user/:id", async (req, res) => {
-  const id = req.params.id;
-  const user = await Course.findByIdAndUpdate(id, req.body);
-  res.json(user)
-});
-
-app.listen(1111, () => {
+app.listen(3001, () => {
   console.log("server has ben started");
 });

@@ -4,13 +4,13 @@ const router = express.Router();
 
 router.get("/users", async (req, res) => {
   const users = await User.find();
-  res.json(users);
+  res.json({data:users});
 });
 
 router.post("/add-user", async (req, res) => {
   User.create(req.body);
   const users = await User.find();
-  res.json(users);
+  res.json({data:users});
 });
 
 router.post("/update-user/:id", async (req, res) => {

@@ -2,12 +2,14 @@ const express = require("express");
 const Mentor = require("../models/Mentors");
 const router = express.Router();
 
-router.post("/add-mentor", (req, res) => {
-  Mentor.create(req.body);
-});
 router.get("/mentors", async (req, res) => {
   const mentors = await Mentor.find();
-  res.json(mentors);
+  res.json({data:mentors});
+});
+
+
+router.post("/add-mentor", (req, res) => {
+  Mentor.create(req.body);
 });
 router.post("/create-course", (req, res) => {
   Course.create(req.body);

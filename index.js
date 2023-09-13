@@ -7,6 +7,8 @@ const MentorRoutes = require("./routers/mentor");
 const CourseRoutes = require("./routers/course");
 const Course = require("./models/Courses");
 const Mentor = require("./models/Mentors");
+
+require('dotenv').config()
 // enable cors
 app.use(
   cors({
@@ -21,6 +23,18 @@ mongoose.connect(
 ).then(res => {
   res && console.log('database connected');
 })
+
+mongoose.set('strictQuery', false)
+
+const connectDB = async() => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI)
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(err);
+    process.exit(1)
+  }
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -75,8 +89,11 @@ app.delete("/delete-mentor/:id", async (req, res) => {
   const mentors = await Mentor.find();
   res.json(mentors);
 });
+connectDB().then(() => {
+
+  app.listen(3001, () => {
+    console.log("server has ben started");
+  });
+})
 
 
-app.listen(3001, () => {
-  console.log("server has ben started");
-});

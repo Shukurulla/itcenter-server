@@ -24,6 +24,10 @@ app.use(UserRoutes);
 app.use(MentorRoutes);
 app.use(CourseRoutes);
 
+app.get('/', (req,res) => {
+  res.send('Hello World')
+})
+
 app.listen(3001, () => {
   console.log("server has ben started");
 });

@@ -25,7 +25,8 @@ app.use(MentorRoutes);
 app.use(CourseRoutes);
 
 app.get('/', (req,res) => {
-  res.send('Hello World')
+  
+  res.json({data: 'Hello World'})
 })
 
 app.listen(3001, () => {

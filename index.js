@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const UserRoutes = require("./routers/user");
 const MentorRoutes = require("./routers/mentor");
 const CourseRoutes = require("./routers/course");
+const Course = require("./models/Courses");
+const Mentor = require("./models/Mentors");
 // enable cors
 app.use(
   cors({
@@ -28,6 +30,50 @@ app.get('/', (req,res) => {
   
   res.json({data: 'Hello World'})
 })
+
+app.get("/courses", async (req, res) => {
+  const courses = await Course.find();
+  res.json({data: courses});
+});
+
+app.post("/delete-course/:id", async (req, res) => {
+  const id = req.body.id;
+  await Course.findByIdAndRemove(id);
+  const courses = await Course.find();
+  res.json(courses);
+});
+
+app.post("/edit-course/:id", async (req, res) => {
+  const id = req.params.id;
+  await Course.findByIdAndUpdate(id, req.body);
+});
+
+app.get("/mentors", async (req, res) => {
+  const mentors = await Mentor.find();
+  res.json({data:mentors});
+});
+
+
+app.post("/add-mentor", (req, res) => {
+  Mentor.create(req.body);
+});
+app.post("/create-course", (req, res) => {
+  Course.create(req.body);
+});
+
+app.post("/edit-mentor/:id", async (req, res) => {
+  const id = req.params.id;
+  await Mentor.findByIdAndUpdate(id, req.body);
+  const mentors = await Mentor.find();
+  res.json(mentors);
+});
+app.delete("/delete-mentor/:id", async (req, res) => {
+  const id = req.params.id;
+  await Mentor.findByIdAndRemove(id);
+  const mentors = await Mentor.find();
+  res.json(mentors);
+});
+
 
 app.listen(3001, () => {
   console.log("server has ben started");

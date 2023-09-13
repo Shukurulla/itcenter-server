@@ -18,7 +18,9 @@ app.use(
 
 mongoose.connect(
   "mongodb+srv://shukurulla:zLKEU8n7Qk9kBRRV@cluster0.9jlzjnl.mongodb.net/it-database"
-);
+).then(res => {
+  res && console.log('database connected');
+})
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

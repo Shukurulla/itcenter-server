@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/courses", async (req, res) => {
   const courses = await Course.find();
-  res.json({data: courses});
+  res.json({ data: courses });
 });
 
 router.post("/delete-course/:id", async (req, res) => {

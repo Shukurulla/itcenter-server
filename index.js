@@ -20,6 +20,7 @@ app.use(
 mongoose.connect(process.env.MONGO_URI).then((res) => {
   res && console.log("database connected");
 });
+console.log(process.env.MONGO_URI);
 
 mongoose.set("strictQuery", false);
 
@@ -45,7 +46,7 @@ app.get("/", (req, res) => {
 });
 
 connectDB().then(() => {
-  app.listen(3001, () => {
+  app.listen(process.env.PORT, () => {
     console.log("server has ben started");
   });
 });

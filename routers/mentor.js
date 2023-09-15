@@ -4,9 +4,8 @@ const router = express.Router();
 
 router.get("/mentors", async (req, res) => {
   const mentors = await Mentor.find();
-  res.json({data:mentors});
+  res.json({ data: mentors });
 });
-
 
 router.post("/add-mentor", (req, res) => {
   Mentor.create(req.body);

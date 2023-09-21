@@ -12,13 +12,7 @@ require("dotenv").config();
 // enable cors
 app.use(
   cors({
-    origin: (origin,callback) => {
-      if(allowedOrigns.indexOf(origin) !== -1 || !origin){
-        callback(null,true)
-      }else{
-        callback(new Error('Not allowed by CORS'))
-      }
-    },
+    origin:'*',
     optionsSuccessStatus: 200,
     credentials: true,
   })

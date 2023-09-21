@@ -6,12 +6,19 @@ const UserRoutes = require("./routers/user");
 const MentorRoutes = require("./routers/mentor");
 const CourseRoutes = require("./routers/course");
 const Auth = require("./routers/auth");
+const allowedOrigns = require('./config/allowedOrigins')
 
 require("dotenv").config();
 // enable cors
 app.use(
   cors({
-    origin: true,
+    origin: (origin,callback) => {
+      if(allowedOrigns.indexOf(origin) !== -1 || !origin){
+        callback(null,true)
+      }else{
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
     optionsSuccessStatus: 200,
     credentials: true,
   })

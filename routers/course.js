@@ -15,6 +15,7 @@ router.post("/delete-course/:id", async (req, res) => {
 });
 router.post("/create-course", (req, res) => {
   Course.create(req.body.course);
+  res.json({data: "data"})
 });
 
 router.post("/edit-course/:id", async (req, res) => {

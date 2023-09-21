@@ -13,9 +13,10 @@ router.post("/delete-course/:id", async (req, res) => {
   const courses = await Course.find();
   res.json({data:courses});
 });
-router.post("/create-course", (req, res) => {
-  Course.create(req.body.course);
-  res.json({data: "data"})
+router.post("/create-course", async(req, res) => {
+  await Course.create(req.body.course);
+  const courses = await Course.find();
+  res.json({data:courses});
 });
 
 router.post("/edit-course/:id", async (req, res) => {

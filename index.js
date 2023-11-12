@@ -6,13 +6,14 @@ const UserRoutes = require("./routers/user");
 const MentorRoutes = require("./routers/mentor");
 const CourseRoutes = require("./routers/course");
 const Auth = require("./routers/auth");
-const allowedOrigns = require('./config/allowedOrigins')
+const LocationRoutes = require("./routers/location");
+const allowedOrigns = require("./config/allowedOrigins");
 
 require("dotenv").config();
 // enable cors
 app.use(
   cors({
-    origin:'*',
+    origin: "*",
     optionsSuccessStatus: 200,
     credentials: true,
   })
@@ -41,6 +42,7 @@ app.use(UserRoutes);
 app.use(MentorRoutes);
 app.use(CourseRoutes);
 app.use(Auth);
+app.use(LocationRoutes);
 
 app.get("/", (req, res) => {
   res.json({ data: "Hello World" });

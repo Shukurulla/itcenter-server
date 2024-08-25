@@ -26,15 +26,9 @@ console.log(process.env.MONGO_URI);
 
 mongoose.set("strictQuery", false);
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.log(err);
-    process.exit(1);
-  }
-};
+mongoose.connect(process.env.MONGO_URI).then(() => {
+  console.log("mongodb connected");
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -48,8 +42,6 @@ app.get("/", (req, res) => {
   res.json({ data: "Hello World" });
 });
 
-connectDB().then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log("server has ben started");
-  });
+app.listen(process.env.PORT, () => {
+  console.log("server has ben started");
 });

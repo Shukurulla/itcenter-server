@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const Location = mongoose.model("Location", {
   lat: {
-    type: string,
+    type: String,
   },
   long: {
-    type: string,
+    type: String,
   },
 });
 

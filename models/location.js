@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const LoactionScheme = mongoose.Schema({
+const Location = mongoose.model("Location", {
   lat: {
     type: string,
   },
@@ -8,7 +8,5 @@ const LoactionScheme = mongoose.Schema({
     type: string,
   },
 });
-
-const Location = mongoose.model("Location", LoactionScheme);
 
 module.exports = Location;
